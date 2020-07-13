@@ -1,0 +1,17 @@
+{
+    "name": "pqr/php-project-lvl2",
+    "description": "Gendiff - Hexlet learning project",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Petr Myazin",
+            "email": "petr.myazin@gmail.com"
+        }
+    ],
+    "bin": [
+        "bin/gendiff"
+    ],
+    "require": {
+        "docopt/docopt": "^1.0"
+    }
+}
