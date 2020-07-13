@@ -13,5 +13,10 @@
     ],
     "require": {
         "docopt/docopt": "^1.0"
+    },
+    "autoload": {
+        "files": [
+            "src/Differ/Differ.php"
+        ]
     }
 }
