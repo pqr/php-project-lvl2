@@ -8,8 +8,8 @@ class DifferTest extends TestCase
 {
     public function testGenDiff()
     {
-        $file1 = __DIR__ . '/../fixtures/1.json';
-        $file2 = __DIR__ . '/../fixtures/2.json';
+        $file1 = __DIR__ . '/fixtures/1.json';
+        $file2 = __DIR__ . '/fixtures/2.json';
 
         $diff = genDiff($file1, $file2);
 
