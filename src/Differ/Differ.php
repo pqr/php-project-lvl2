@@ -23,7 +23,7 @@ function readJsonFile(string $pathToFile): array
         throw new \Exception("File $pathToFile not found");
     }
 
-    return json_decode($content, true, JSON_THROW_ON_ERROR);
+    return json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 }
 
 function getDiff(array $data1, array $data2): array
