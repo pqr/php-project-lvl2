@@ -2,28 +2,35 @@
 
 namespace Differ\Differ;
 
+use function Differ\Parsers\parse;
+
 const ADDED = 'added';
 const REMOVED = 'removed';
 const CHANGED = 'changed';
 
 function genDiff(string $pathToFile1, string $pathToFile2): string
 {
-    $data1 = readJsonFile($pathToFile1);
-    $data2 = readJsonFile($pathToFile2);
+    $content1 = readFile($pathToFile1);
+    $format1 = pathinfo($pathToFile1, PATHINFO_EXTENSION);
+    $data1 = parse($content1, $format1);
+
+    $content2 = readFile($pathToFile2);
+    $format2 = pathinfo($pathToFile1, PATHINFO_EXTENSION);
+    $data2 = parse($content2, $format2);
 
     $diff = getDiff($data1, $data2);
 
     return diffToString($diff);
 }
 
-function readJsonFile(string $pathToFile): array
+function readFile(string $pathToFile): string
 {
     $content = file_get_contents($pathToFile);
     if ($content === false) {
         throw new \Exception("File $pathToFile not found");
     }
 
-    return json_decode($content, true, 512, JSON_THROW_ON_ERROR);
+    return $content;
 }
 
 function getDiff(array $data1, array $data2): array
