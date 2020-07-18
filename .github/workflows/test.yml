@@ -23,5 +23,5 @@ jobs:
         run: make test-with-coverage
       - name: Upload Coverage
         uses: paambaati/codeclimate-action@v2.6.0
-          env:
-            CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
