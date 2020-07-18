@@ -5,7 +5,7 @@ on:
     branches: master
 
 jobs:
-  lint:
+  lint_and_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,4 +27,4 @@ jobs:
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
-          ./cc-test-reporter -t clover
+          ./cc-test-reporter after-build -t clover
