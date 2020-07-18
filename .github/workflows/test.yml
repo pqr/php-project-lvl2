@@ -1,4 +1,4 @@
-name: lint
+name: Lint and Test
 
 on:
   push:
@@ -22,6 +22,6 @@ jobs:
       - name: Test
         run: make test-with-coverage
       - name: Upload Coverage
-        env:
-          CODECLIMATE_REPO_TOKEN: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
-        run: vendor/bin/test-reporter
+        uses: paambaati/codeclimate-action@v2.6.0
+          env:
+            CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
