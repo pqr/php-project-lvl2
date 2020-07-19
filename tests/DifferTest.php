@@ -30,6 +30,18 @@ class DifferTest extends TestCase
         $this->assertEquals($expectedDiff, $diff);
     }
 
+    public function testGenDiffJsonToJson()
+    {
+        $file1 = __DIR__ . '/fixtures/1.json';
+        $file2 = __DIR__ . '/fixtures/2.json';
+
+        $diff = genDiff($file1, $file2, 'json');
+
+        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result.json'));
+
+        $this->assertEquals($expectedDiff, $diff);
+    }
+
     public function testGenDiffYamlToPretty()
     {
         $file1 = __DIR__ . '/fixtures/1.yml';
@@ -50,6 +62,18 @@ class DifferTest extends TestCase
         $diff = genDiff($file1, $file2, 'plain');
 
         $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result_plain.txt'));
+
+        $this->assertEquals($expectedDiff, $diff);
+    }
+
+    public function testGenDiffYamlToJson()
+    {
+        $file1 = __DIR__ . '/fixtures/1.yml';
+        $file2 = __DIR__ . '/fixtures/2.yml';
+
+        $diff = genDiff($file1, $file2, 'json');
+
+        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result.json'));
 
         $this->assertEquals($expectedDiff, $diff);
     }

@@ -1,0 +1,116 @@
+{
+    "0": {
+        "key": "common",
+        "diffType": "nested",
+        "value1": {
+            "setting1": "Value 1",
+            "setting2": "200",
+            "setting3": true,
+            "setting6": {
+                "key": "value"
+            }
+        },
+        "value2": {
+            "setting1": "Value 1",
+            "setting3": true,
+            "setting4": "blah blah",
+            "setting5": {
+                "key5": "value5"
+            }
+        },
+        "children": {
+            "0": {
+                "key": "setting1",
+                "diffType": "notchanged",
+                "value1": "Value 1",
+                "value2": "Value 1",
+                "children": null
+            },
+            "1": {
+                "key": "setting2",
+                "diffType": "removed",
+                "value1": "200",
+                "value2": null,
+                "children": null
+            },
+            "2": {
+                "key": "setting3",
+                "diffType": "notchanged",
+                "value1": true,
+                "value2": true,
+                "children": null
+            },
+            "3": {
+                "key": "setting6",
+                "diffType": "removed",
+                "value1": {
+                    "key": "value"
+                },
+                "value2": null,
+                "children": null
+            },
+            "6": {
+                "key": "setting4",
+                "diffType": "added",
+                "value1": null,
+                "value2": "blah blah",
+                "children": null
+            },
+            "7": {
+                "key": "setting5",
+                "diffType": "added",
+                "value1": null,
+                "value2": {
+                    "key5": "value5"
+                },
+                "children": null
+            }
+        }
+    },
+    "1": {
+        "key": "group1",
+        "diffType": "nested",
+        "value1": {
+            "baz": "bas",
+            "foo": "bar"
+        },
+        "value2": {
+            "foo": "bar",
+            "baz": "bars"
+        },
+        "children": [
+            {
+                "key": "baz",
+                "diffType": "changed",
+                "value1": "bas",
+                "value2": "bars",
+                "children": null
+            },
+            {
+                "key": "foo",
+                "diffType": "notchanged",
+                "value1": "bar",
+                "value2": "bar",
+                "children": null
+            }
+        ]
+    },
+    "2": {
+        "key": "group2",
+        "diffType": "removed",
+        "value1": {
+            "abc": "12345"
+        },
+        "value2": null,
+        "children": null
+    },
+    "5": {
+        "key": "group3",
+        "diffType": "added",
+        "value1": null,
+        "value2": {
+            "fee": "100500"
+        },
+        "children": null
+    }
+}
