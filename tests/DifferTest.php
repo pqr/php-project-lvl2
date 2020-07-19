@@ -13,7 +13,7 @@ class DifferTest extends TestCase
 
         $diff = genDiff($file1, $file2);
 
-        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result'));
+        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result.txt'));
 
         $this->assertEquals($expectedDiff, $diff);
     }
@@ -24,7 +24,7 @@ class DifferTest extends TestCase
 
         $diff = genDiff($file1, $file2);
 
-        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result'));
+        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result.txt'));
 
         $this->assertEquals($expectedDiff, $diff);
     }
