@@ -39,6 +39,4 @@ gendiff --format=plain 1.json 2.json
 gendiff --format=json 1.json 2.json
 ```
 
-## Пример использоваения
-
 [![asciicast](https://asciinema.org/a/pthp3fmcRh5lD85YzAzvoTdnd.svg)](https://asciinema.org/a/pthp3fmcRh5lD85YzAzvoTdnd)
