@@ -34,6 +34,11 @@ gendiff 1.yml 2.yml
 gendiff --format=plain 1.json 2.json
 ```
 
+Сравнить JSON файлы и вывести в результат в структурированном JSON (удобно для обработки сторонним приложением):
+```
+gendiff --format=json 1.json 2.json
+```
+
 ## Пример использоваения
 
 [![asciicast](https://asciinema.org/a/pthp3fmcRh5lD85YzAzvoTdnd.svg)](https://asciinema.org/a/pthp3fmcRh5lD85YzAzvoTdnd)
