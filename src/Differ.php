@@ -2,6 +2,7 @@
 
 namespace Differ\Differ;
 
+use function Differ\Formatters\getFormatter;
 use function Differ\Parsers\parse;
 
 const ADDED = 'added';
@@ -10,7 +11,7 @@ const CHANGED = 'changed';
 const NOTCHANGED = 'notchanged';
 const NESTED = 'nested';
 
-function genDiff(string $pathToFile1, string $pathToFile2): string
+function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'pretty'): string
 {
     $content1 = readFile($pathToFile1);
     $format1 = pathinfo($pathToFile1, PATHINFO_EXTENSION);
@@ -22,7 +23,8 @@ function genDiff(string $pathToFile1, string $pathToFile2): string
 
     $diffTree = getDiffTree($data1, $data2);
 
-    return diffToString($diffTree);
+    $render = getFormatter($format);
+    return $render($diffTree);
 }
 
 function readFile(string $pathToFile): string
@@ -72,57 +74,4 @@ function getDiffTree(array $data1, array $data2): array
         },
         $allKeys
     );
-}
-
-function diffToString(array $diffTree): string
-{
-    $diffLines = array_map(
-        static function ($node) {
-            $key = $node['key'];
-            $diffType = $node['diffType'];
-            $value1 = $node['value1'];
-            $value2 = $node['value2'];
-            switch ($diffType) {
-                case ADDED:
-                    $out = $key . ": " . stringify($value2);
-                    return addIndent("  + ", $out);
-                case REMOVED:
-                    $out = $key . ": " . stringify($value1);
-                    return addIndent("  - ", $out);
-                case CHANGED:
-                    $line1 = $key . ": " . stringify($value1);
-                    $line2 = $key . ": " . stringify($value2);
-                    return addIndent("  + ", $line1)
-                        . "\n"
-                        . addIndent("  - ", $line2);
-                case NOTCHANGED:
-                    $out = $key . ": " . stringify($value1);
-                    return addIndent("    ", $out);
-                case NESTED:
-                    $out = $key . ": " . diffToString($node['children']);
-                    return addIndent("    ", $out);
-                default:
-                    throw new \Exception("Unknown diff type $diffType");
-            }
-        },
-        $diffTree
-    );
-
-    return "{\n" . implode("\n", $diffLines) . "\n}";
-}
-
-function stringify($value): string
-{
-    if (is_array($value)) {
-        return json_encode($value, JSON_PRETTY_PRINT);
-    }
-
-    return (string)$value;
-}
-
-function addIndent(string $indentString, string $text): string
-{
-    $lines = explode("\n", $text);
-    $linesWithIndent = array_map(fn($line) => $indentString . $line, $lines);
-    return implode("\n", $linesWithIndent);
 }

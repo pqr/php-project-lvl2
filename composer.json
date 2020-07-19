@@ -19,7 +19,10 @@
   "autoload": {
     "files": [
       "src/Differ.php",
-      "src/Parsers.php"
+      "src/Parsers.php",
+      "src/Formatters.php",
+      "src/Formatters/Plain.php",
+      "src/Formatters/Pretty.php"
     ]
   },
   "require-dev": {
