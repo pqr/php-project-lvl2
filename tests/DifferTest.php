@@ -8,75 +8,36 @@ use function Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    public function testGenDiffJsonToPretty()
+    /**
+     * @dataProvider fixturesProvider
+     */
+    public function testGenDiff($sourceFilename1, $sourceFilename2, $format, $resultFilename)
     {
-        $file1 = __DIR__ . '/fixtures/1.json';
-        $file2 = __DIR__ . '/fixtures/2.json';
+        $sourceFilepath1 = $this->getFixtureFilepath($sourceFilename1);
+        $sourceFilepath2 = $this->getFixtureFilepath($sourceFilename2);
 
-        $diff = genDiff($file1, $file2, 'pretty');
+        $diff = genDiff($sourceFilepath1, $sourceFilepath2, $format);
 
-        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result_pretty.txt'));
+        $resultFilepath = $this->getFixtureFilepath($resultFilename);
+        $expectedDiff = trim(file_get_contents($resultFilepath));
 
         $this->assertEquals($expectedDiff, $diff);
     }
 
-    public function testGenDiffJsonToPlain()
+    protected function getFixtureFilepath($filename)
     {
-        $file1 = __DIR__ . '/fixtures/1.json';
-        $file2 = __DIR__ . '/fixtures/2.json';
-
-        $diff = genDiff($file1, $file2, 'plain');
-
-        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result_plain.txt'));
-
-        $this->assertEquals($expectedDiff, $diff);
+        return __DIR__ . "/fixtures/$filename";
     }
 
-    public function testGenDiffJsonToJson()
+    public function fixturesProvider()
     {
-        $file1 = __DIR__ . '/fixtures/1.json';
-        $file2 = __DIR__ . '/fixtures/2.json';
-
-        $diff = genDiff($file1, $file2, 'json');
-
-        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result.json'));
-
-        $this->assertEquals($expectedDiff, $diff);
-    }
-
-    public function testGenDiffYamlToPretty()
-    {
-        $file1 = __DIR__ . '/fixtures/1.yml';
-        $file2 = __DIR__ . '/fixtures/2.yml';
-
-        $diff = genDiff($file1, $file2);
-
-        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result_pretty.txt'));
-
-        $this->assertEquals($expectedDiff, $diff);
-    }
-
-    public function testGenDiffYamlToPlain()
-    {
-        $file1 = __DIR__ . '/fixtures/1.yml';
-        $file2 = __DIR__ . '/fixtures/2.yml';
-
-        $diff = genDiff($file1, $file2, 'plain');
-
-        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result_plain.txt'));
-
-        $this->assertEquals($expectedDiff, $diff);
-    }
-
-    public function testGenDiffYamlToJson()
-    {
-        $file1 = __DIR__ . '/fixtures/1.yml';
-        $file2 = __DIR__ . '/fixtures/2.yml';
-
-        $diff = genDiff($file1, $file2, 'json');
-
-        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result.json'));
-
-        $this->assertEquals($expectedDiff, $diff);
+        return [
+            ['1.json', '2.json', 'pretty', 'result_pretty.txt'],
+            ['1.json', '2.json', 'plain', 'result_plain.txt'],
+            ['1.json', '2.json', 'json', 'result.json'],
+            ['1.yml', '2.yml', 'pretty', 'result_pretty.txt'],
+            ['1.yml', '2.yml', 'plain', 'result_plain.txt'],
+            ['1.yml', '2.yml', 'json', 'result.json'],
+        ];
     }
 }
