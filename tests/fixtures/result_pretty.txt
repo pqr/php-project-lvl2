@@ -4,12 +4,12 @@
       - setting2: 200
         setting3: 1
       - setting6: {
-      -     "key": "value"
-      - }
+            "key": "value"
+        }
       + setting4: blah blah
       + setting5: {
-      +     "key5": "value5"
-      + }
+            "key5": "value5"
+        }
     }
     group1: {
       + baz: bas
@@ -17,9 +17,9 @@
         foo: bar
     }
   - group2: {
-  -     "abc": "12345"
-  - }
+        "abc": "12345"
+    }
   + group3: {
-  +     "fee": "100500"
-  + }
+        "fee": "100500"
+    }
 }

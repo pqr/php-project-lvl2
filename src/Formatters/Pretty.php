@@ -60,7 +60,14 @@ function stringify($value): string
 
 function addIndent(string $indentType, string $text): string
 {
+    $firstLineIndent = "  {$indentType} ";
+    $restLinesIndent = "    ";
+
     $lines = explode("\n", $text);
-    $linesWithIndent = array_map(fn($line) => "  {$indentType} {$line}", $lines);
-    return implode("\n", $linesWithIndent);
+    $firstLine = array_shift($lines);
+
+    $firstLineWithIndent = $firstLineIndent . $firstLine;
+    $restLinesWithIndent = array_map(fn($line) => $restLinesIndent . $line, $lines);
+
+    return implode("\n", [$firstLineWithIndent, ...$restLinesWithIndent]);
 }
