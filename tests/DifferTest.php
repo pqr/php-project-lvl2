@@ -1,5 +1,7 @@
 <?php
 
+namespace tests;
+
 use PHPUnit\Framework\TestCase;
 
 use function Differ\Differ\genDiff;
@@ -13,7 +15,7 @@ class DifferTest extends TestCase
 
         $diff = genDiff($file1, $file2, 'pretty');
 
-        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result_pretty.txt'));
+        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result_pretty.txt'));
 
         $this->assertEquals($expectedDiff, $diff);
     }
@@ -25,7 +27,7 @@ class DifferTest extends TestCase
 
         $diff = genDiff($file1, $file2, 'plain');
 
-        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result_plain.txt'));
+        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result_plain.txt'));
 
         $this->assertEquals($expectedDiff, $diff);
     }
@@ -37,7 +39,7 @@ class DifferTest extends TestCase
 
         $diff = genDiff($file1, $file2, 'json');
 
-        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result.json'));
+        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result.json'));
 
         $this->assertEquals($expectedDiff, $diff);
     }
@@ -49,7 +51,7 @@ class DifferTest extends TestCase
 
         $diff = genDiff($file1, $file2);
 
-        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result_pretty.txt'));
+        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result_pretty.txt'));
 
         $this->assertEquals($expectedDiff, $diff);
     }
@@ -61,7 +63,7 @@ class DifferTest extends TestCase
 
         $diff = genDiff($file1, $file2, 'plain');
 
-        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result_plain.txt'));
+        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result_plain.txt'));
 
         $this->assertEquals($expectedDiff, $diff);
     }
@@ -73,7 +75,7 @@ class DifferTest extends TestCase
 
         $diff = genDiff($file1, $file2, 'json');
 
-        $expectedDiff = trim(file_get_contents(__DIR__ .'/fixtures/result.json'));
+        $expectedDiff = trim(file_get_contents(__DIR__ . '/fixtures/result.json'));
 
         $this->assertEquals($expectedDiff, $diff);
     }
