@@ -13,7 +13,7 @@ const FORMATTERS = [
 function getFormatter(string $format): callable
 {
     if (!isset(FORMATTERS[$format])) {
-        throw new \Exception("Unknown format $format");
+        throw new \Exception("Unknown output format $format");
     }
 
     return FORMATTERS[$format];

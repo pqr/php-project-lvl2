@@ -14,6 +14,6 @@ function parse(string $content, string $format): array
             return json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 
         default:
-            throw new \Exception('Unknown format');
+            throw new \Exception("Unknown input format: $format");
     }
 }
