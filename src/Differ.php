@@ -29,9 +29,13 @@ function genDiff(string $pathToFile1, string $pathToFile2, string $format = 'pre
 
 function readFile(string $pathToFile): string
 {
+    if (!file_exists($pathToFile)) {
+        throw new \Exception("File $pathToFile not found");
+    }
+
     $content = file_get_contents($pathToFile);
     if ($content === false) {
-        throw new \Exception("File $pathToFile not found");
+        throw new \Exception("Can't read file $pathToFile");
     }
 
     return $content;
