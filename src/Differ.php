@@ -47,35 +47,42 @@ function getDiffTree(array $data1, array $data2): array
 
     return array_map(
         static function ($key) use ($data1, $data2) {
-            $diffType = null;
-            $children = null;
             if (!array_key_exists($key, $data1)) {
                 $diffType = ADDED;
                 $value1 = null;
                 $value2 = $data2[$key];
-            } elseif (!array_key_exists($key, $data2)) {
+                return makeNode($key, $diffType, $value1, $value2);
+            }
+
+            if (!array_key_exists($key, $data2)) {
                 $diffType = REMOVED;
                 $value1 = $data1[$key];
                 $value2 = null;
-            } else {
-                $value1 = $data1[$key];
-                $value2 = $data2[$key];
-                if (is_array($value1) && is_array($value2)) {
-                    $diffType = NESTED;
-                    $children = getDiffTree($value1, $value2);
-                } else {
-                    $diffType = ($value1 === $value2) ? NOTCHANGED : CHANGED;
-                }
+                return makeNode($key, $diffType, $value1, $value2);
             }
 
-            return [
-                'key' => $key,
-                'diffType' => $diffType,
-                'value1' => $value1,
-                'value2' => $value2,
-                'children' => $children,
-            ];
+            $value1 = $data1[$key];
+            $value2 = $data2[$key];
+            if (is_array($value1) && is_array($value2)) {
+                $diffType = NESTED;
+                $children = getDiffTree($value1, $value2);
+                return makeNode($key, $diffType, $value1, $value2, $children);
+            }
+
+            $diffType = ($value1 === $value2) ? NOTCHANGED : CHANGED;
+            return makeNode($key, $diffType, $value1, $value2);
         },
         $allKeys
     );
+}
+
+function makeNode(string $key, string $diffType, $value1, $value2, ?array $children = null)
+{
+    return [
+        'key' => $key,
+        'diffType' => $diffType,
+        'value1' => $value1,
+        'value2' => $value2,
+        'children' => $children,
+    ];
 }
